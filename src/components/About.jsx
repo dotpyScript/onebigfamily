@@ -1,16 +1,16 @@
-import React, { useRef, memo } from "react";
-import { motion, useInView } from "framer-motion";
+import React, { useRef, memo } from 'react';
+import { motion, useInView } from 'framer-motion';
 import {
   FaQuoteLeft,
   FaHeart,
   FaHandHoldingHeart,
   FaUsers,
   FaHandshake,
-} from "react-icons/fa";
-import CountUp from "react-countup";
+} from 'react-icons/fa';
+import CountUp from 'react-countup';
 
 const StatItem = memo(
-  ({ number, prefix = "", suffix = "", label, showDivider, decimals = 0 }) => (
+  ({ number, prefix = '', suffix = '', label, showDivider, decimals = 0 }) => (
     <div className="relative text-center">
       <h4 className="text-2xl font-bold mb-1 text-gray-800">
         <CountUp
@@ -58,48 +58,51 @@ const About = () => {
   const stats = [
     {
       number: 12450,
-      suffix: "+",
-      label: "Active Members",
+      suffix: '+',
+      label: 'Active Members',
     },
     {
       number: 12.4,
-      prefix: "₦",
-      suffix: "M+",
-      label: "Monthly Pool",
+      prefix: '₦',
+      suffix: 'M+',
+      label: 'Monthly Pool',
       decimals: 1,
     },
     {
       number: 5423,
-      label: "Lives Impacted",
+      label: 'Lives Impacted',
     },
   ];
 
   const features = [
     {
       icon: FaUsers,
-      title: "United Community",
+      title: 'United Community',
       description:
-        "A diverse family united by shared experiences, bringing together soldiers, students, and civil servants.",
+        'A diverse family united by shared experiences, bringing together soldiers, students, and civil servants.',
       delay: 0.2,
     },
     {
       icon: FaHandshake,
-      title: "Monthly Support",
+      title: 'Monthly Support',
       description:
-        "₦1,000 monthly contributions creating a powerful support system for those in need.",
+        '₦1,000 monthly contributions creating a powerful support system for those in need.',
       delay: 0.4,
     },
     {
       icon: FaHeart,
-      title: "Lasting Impact",
+      title: 'Lasting Impact',
       description:
-        "Supporting crucial life moments through education, emergencies, and community development.",
+        'Supporting crucial life moments through education, emergencies, and community development.',
       delay: 0.6,
     },
   ];
 
   return (
-    <section className="relative py-24 overflow-hidden bg-white font-poppins">
+    <section
+      className="relative py-24 overflow-hidden bg-white font-poppins"
+      id="about"
+    >
       {/* Bristle Animation */}
       <motion.div
         className="absolute top-10 right-10 w-24 h-24 opacity-20"
@@ -110,8 +113,8 @@ const About = () => {
         transition={{
           duration: 3,
           repeat: Infinity,
-          repeatType: "reverse",
-          ease: "easeInOut",
+          repeatType: 'reverse',
+          ease: 'easeInOut',
         }}
       >
         <div className="w-full h-full relative">
@@ -120,10 +123,10 @@ const About = () => {
               key={index}
               className="absolute w-1 bg-black"
               style={{
-                height: "100%",
+                height: '100%',
                 left: `${index * 3}px`,
                 transform: `rotate(${index * 5}deg)`,
-                transformOrigin: "bottom",
+                transformOrigin: 'bottom',
               }}
             />
           ))}
@@ -149,7 +152,7 @@ const About = () => {
                   className="w-full h-[600px] object-cover"
                   onError={(e) => {
                     e.target.src =
-                      "https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1470&auto=format&fit=crop";
+                      'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1470&auto=format&fit=crop';
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -195,14 +198,14 @@ const About = () => {
               {[
                 {
                   icon: FaHeart,
-                  title: "Our Mission",
+                  title: 'Our Mission',
                   description:
-                    "To create a sustainable support system that empowers members through collective giving and mutual aid.",
+                    'To create a sustainable support system that empowers members through collective giving and mutual aid.',
                   delay: 0.2,
                 },
                 {
                   icon: FaHandHoldingHeart,
-                  title: "Our Impact",
+                  title: 'Our Impact',
                   description:
                     "From education to emergencies, we've touched thousands of lives through our monthly contribution system.",
                   delay: 0.4,
@@ -256,7 +259,7 @@ const About = () => {
                 href="#join"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                 className="inline-block bg-black text-white px-8 py-3 rounded-full font-medium text-base"
               >
                 Join Our Community

@@ -121,14 +121,15 @@ const Hero = () => {
                 transition={{ delay: 0.3 }}
                 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-8 text-white leading-tight"
               >
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3">
-                  <span className="text-white inline-block">
-                    Together we build
-                  </span>
-                  <div className="inline-flex items-center">
+                <div className="flex flex-col items-center justify-center gap-3">
+                  {/* First group - Together we build + Stronger */}
+                  <div className="flex flex-col sm:flex-row items-center gap-2">
+                    <span className="text-white whitespace-nowrap">
+                      Together we build
+                    </span>
                     <motion.span
                       key={currentAdjectiveIndex}
-                      className="text-white font-extrabold whitespace-nowrap"
+                      className="text-white font-extrabold whitespace-nowrap flex items-center"
                       style={{
                         fontFamily: "'Poppins', sans-serif",
                       }}
@@ -146,7 +147,8 @@ const Hero = () => {
                       />
                     </motion.span>
                   </div>
-                  <span className="text-white">communities</span>
+                  {/* Second group - communities */}
+                  <span className="text-white block">communities</span>
                 </div>
               </motion.h1>
 

@@ -52,17 +52,22 @@ const Navbar = () => {
     const element = document.getElementById(targetId);
 
     if (element) {
+      // Get dimensions
       const navHeight = 80; // Height of the navbar
       const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - navHeight;
+      const offsetPosition = elementPosition + window.scrollY - navHeight;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
+      // Close mobile menu first
+      setIsOpen(false);
 
-      setIsOpen(false); // Close mobile menu
-      setActiveSection(targetId);
+      // Small delay to allow mobile menu to close
+      setTimeout(() => {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+        setActiveSection(targetId);
+      }, 100);
     }
   };
 
