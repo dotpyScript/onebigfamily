@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none">
+  <style>
+    .primary { fill: #4F46E5; }
+    .primary-light { fill: #818CF8; }
+    .primary-lighter { fill: #C7D2FE; }
+    .accent { fill: #EC4899; }
+    .accent-light { fill: #F9A8D4; }
+    .neutral { fill: #6B7280; }
+    .neutral-light { fill: #D1D5DB; }
+    .background { fill: #F3F4F6; }
+  </style>
+  
+  <!-- Background -->
+  <circle cx="400" cy="300" r="250" class="background" />
+  
+  <!-- Community circle -->
+  <circle cx="400" cy="300" r="150" class="primary-lighter" opacity="0.7" />
+  
+  <!-- People figures around the circle -->
+  <g transform="translate(400, 300)">
+    <!-- Person 1 -->
+    <g transform="translate(-120, -120)">
+      <circle cx="0" cy="0" r="30" class="primary" />
+      <circle cx="0" cy="-15" r="12" class="primary-light" />
+      <path d="M-15,5 Q0,20 15,5" stroke="#FFFFFF" stroke-width="3" fill="none" />
+    </g>
+    
+    <!-- Person 2 -->
+    <g transform="translate(120, -120)">
+      <circle cx="0" cy="0" r="30" class="accent" />
+      <circle cx="0" cy="-15" r="12" class="accent-light" />
+      <path d="M-15,5 Q0,20 15,5" stroke="#FFFFFF" stroke-width="3" fill="none" />
+    </g>
+    
+    <!-- Person 3 -->
+    <g transform="translate(120, 120)">
+      <circle cx="0" cy="0" r="30" class="primary" />
+      <circle cx="0" cy="-15" r="12" class="primary-light" />
+      <path d="M-15,5 Q0,20 15,5" stroke="#FFFFFF" stroke-width="3" fill="none" />
+    </g>
+    
+    <!-- Person 4 -->
+    <g transform="translate(-120, 120)">
+      <circle cx="0" cy="0" r="30" class="accent" />
+      <circle cx="0" cy="-15" r="12" class="accent-light" />
+      <path d="M-15,5 Q0,20 15,5" stroke="#FFFFFF" stroke-width="3" fill="none" />
+    </g>
+    
+    <!-- Person 5 top -->
+    <g transform="translate(0, -170)">
+      <circle cx="0" cy="0" r="25" class="primary" />
+      <circle cx="0" cy="-12" r="10" class="primary-light" />
+      <path d="M-12,4 Q0,16 12,4" stroke="#FFFFFF" stroke-width="2.5" fill="none" />
+    </g>
+    
+    <!-- Person 6 right -->
+    <g transform="translate(170, 0)">
+      <circle cx="0" cy="0" r="25" class="accent" />
+      <circle cx="0" cy="-12" r="10" class="accent-light" />
+      <path d="M-12,4 Q0,16 12,4" stroke="#FFFFFF" stroke-width="2.5" fill="none" />
+    </g>
+    
+    <!-- Person 7 bottom -->
+    <g transform="translate(0, 170)">
+      <circle cx="0" cy="0" r="25" class="primary" />
+      <circle cx="0" cy="-12" r="10" class="primary-light" />
+      <path d="M-12,4 Q0,16 12,4" stroke="#FFFFFF" stroke-width="2.5" fill="none" />
+    </g>
+    
+    <!-- Person 8 left -->
+    <g transform="translate(-170, 0)">
+      <circle cx="0" cy="0" r="25" class="accent" />
+      <circle cx="0" cy="-12" r="10" class="accent-light" />
+      <path d="M-12,4 Q0,16 12,4" stroke="#FFFFFF" stroke-width="2.5" fill="none" />
+    </g>
+    
+    <!-- Connection lines -->
+    <line x1="-110" y1="-110" x2="-20" y2="-20" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="110" y1="-110" x2="20" y2="-20" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="110" y1="110" x2="20" y2="20" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="-110" y1="110" x2="-20" y2="20" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="0" y1="-160" x2="0" y2="-40" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="160" y1="0" x2="40" y2="0" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="0" y1="160" x2="0" y2="40" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    <line x1="-160" y1="0" x2="-40" y2="0" stroke="#4F46E5" stroke-width="3" opacity="0.6" />
+    
+    <!-- Center symbol - heart -->
+    <path d="M0,20 C-25,-10 -50,-10 -25,-30 C0,-50 0,-50 25,-30 C50,-10 25,-10 0,20 Z" class="accent" />
+    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#4F46E5">COMMUNITY</text>
+  </g>
+  
+  <!-- Decorative elements -->
+  <circle cx="150" cy="120" r="15" class="primary" opacity="0.3" />
+  <circle cx="180" cy="150" r="10" class="accent" opacity="0.3" />
+  <circle cx="650" cy="480" r="15" class="primary" opacity="0.3" />
+  <circle cx="620" cy="450" r="10" class="accent" opacity="0.3" />
+  
+  <path d="M100,200 Q150,100 200,200" stroke="#4F46E5" stroke-width="3" opacity="0.2" fill="none" />
+  <path d="M600,400 Q650,500 700,400" stroke="#4F46E5" stroke-width="3" opacity="0.2" fill="none" />
+</svg> 
