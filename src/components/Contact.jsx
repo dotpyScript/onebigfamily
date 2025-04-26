@@ -245,7 +245,7 @@ const Contact = () => {
                     </label>
                     <input
                       type="text"
-                      name="from_name"
+                      name="name"
                       value={formData.name}
                       onChange={handleChange}
                       required
@@ -259,7 +259,7 @@ const Contact = () => {
                     </label>
                     <input
                       type="email"
-                      name="from_email"
+                      name="email"
                       value={formData.email}
                       onChange={handleChange}
                       required

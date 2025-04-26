@@ -2,13 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import OptimizedImage from './OptimizedImage';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
+  const [activeSection, setActiveSection] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Update active section when location changes
+  useEffect(() => {
+    // Remove the leading slash to match our nav link format
+    const currentPath =
+      location.pathname === '/' ? 'home' : location.pathname.substring(1);
+    setActiveSection(currentPath);
+  }, [location]);
 
   // Handle scroll effect and active section
   useEffect(() => {
@@ -20,28 +29,33 @@ const Navbar = () => {
         setScrolled(false);
       }
 
-      // Update active section
-      const sections = navLinks.map((link) => link.href.substring(1));
-      const currentSection = sections.find((section) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 100 && rect.bottom >= 100;
-        }
-        return false;
-      });
+      // Only update active section on home page
+      if (location.pathname === '/') {
+        const sections = navLinks
+          .filter((link) => link.href.startsWith('#'))
+          .map((link) => link.href.substring(1));
 
-      if (currentSection) {
-        setActiveSection(currentSection);
+        const currentSection = sections.find((section) => {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top <= 100 && rect.bottom >= 100;
+          }
+          return false;
+        });
+
+        if (currentSection) {
+          setActiveSection(currentSection);
+        }
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   const navLinks = [
-    { name: 'Home', href: '/home' },
+    { name: 'Home', href: '/' },
     { name: 'About', href: '/about' },
     { name: 'Events', href: '/events' },
     { name: 'Contact', href: '/contact' },
@@ -49,34 +63,43 @@ const Navbar = () => {
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
+    setIsOpen(false);
 
-    if (href.startsWith('#')) {
-      const targetId = href.substring(1);
-      const element = document.getElementById(targetId);
+    // For external routes (not hash links), navigate directly
+    if (!href.startsWith('#')) {
+      navigate(href);
+      window.scrollTo(0, 0); // Scroll to top for new pages
+      setActiveSection('');
+      return;
+    }
 
+    // For internal links on home page
+    if (location.pathname === '/') {
+      const element = document.getElementById(href.substring(1));
       if (element) {
-        // Get dimensions
-        const navHeight = 80; // Height of the navbar
+        const navHeight = 80;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.scrollY - navHeight;
-
-        // Close mobile menu first
-        setIsOpen(false);
-
-        // Small delay to allow mobile menu to close
-        setTimeout(() => {
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth',
+        });
+      }
+    } else {
+      // If we're not on home page, navigate to home first
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(href.substring(1));
+        if (element) {
+          const navHeight = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.scrollY - navHeight;
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth',
           });
-          setActiveSection(targetId);
-        }, 100);
-      }
-    } else if (href.startsWith('/')) {
-      // Handle absolute paths
-      navigate(href);
-      setIsOpen(false);
-      setActiveSection(''); // Clear active section when navigating to a new page
+        }
+      }, 100);
     }
   };
 
@@ -84,6 +107,7 @@ const Navbar = () => {
     e.preventDefault();
     navigate('/donate');
     setIsOpen(false);
+    window.scrollTo(0, 0); // Scroll to top when navigating to donate page
   };
 
   return (
@@ -128,7 +152,8 @@ const Navbar = () => {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`px-3 lg:px-4 py-2 text-white text-base lg:text-lg font-medium tracking-wider hover:text-gray-300 relative group transition-all duration-300 ${
-                  activeSection === link.href.substring(1)
+                  (link.href === '/' && activeSection === 'home') ||
+                  link.href.substring(1) === activeSection
                     ? 'text-white'
                     : 'text-white/80'
                 }`}
@@ -138,7 +163,8 @@ const Navbar = () => {
                 {link.name}
                 <span
                   className={`absolute bottom-0 left-0 h-0.5 bg-white transition-all duration-300 ${
-                    activeSection === link.href.substring(1)
+                    (link.href === '/' && activeSection === 'home') ||
+                    link.href.substring(1) === activeSection
                       ? 'w-full'
                       : 'w-0 group-hover:w-full'
                   }`}
@@ -211,7 +237,10 @@ const Navbar = () => {
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
                 className={`block px-6 py-4 text-white text-lg font-medium hover:bg-white/10 transition-all duration-300 border-b border-white/10 last:border-b-0 ${
-                  activeSection === link.href.substring(1) ? 'bg-white/5' : ''
+                  (link.href === '/' && activeSection === 'home') ||
+                  link.href.substring(1) === activeSection
+                    ? 'bg-white/5'
+                    : ''
                 }`}
                 whileTap={{ scale: 0.98 }}
               >

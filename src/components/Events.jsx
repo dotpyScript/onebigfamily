@@ -9,6 +9,7 @@ import {
   FaTicketAlt,
   FaChevronRight,
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Events = () => {
   const [activeTab, setActiveTab] = useState('upcoming');
@@ -226,14 +227,16 @@ const Events = () => {
           viewport={{ once: true }}
           className="mt-16 text-center"
         >
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 text-black font-medium group"
-          >
-            <span>View All Events</span>
-            <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-          </motion.button>
+          <Link to="/events">
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="inline-flex items-center gap-2 text-black font-medium group"
+            >
+              <span>View All Events</span>
+              <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>

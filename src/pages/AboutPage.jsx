@@ -5,39 +5,45 @@ import { Link } from 'react-router-dom';
 
 const AboutPage = () => {
   return (
-    <main className="w-full">
-      {/* Hero Section */}
-      <section className="relative w-full h-screen">
+    <>
+      {/* Hero Section with Image Background */}
+      <section className="relative h-[50vh] overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: 'url("/images/hero3.jpg")',
           }}
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50" />
+        {/* Dark overlay with gradient - matching Hero.jsx */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80" />
 
-        {/* Hero Content */}
-        <div className="relative h-full flex flex-col justify-center items-center text-center px-4">
+        {/* Hero Content - Adjusted positioning */}
+        <div className="absolute inset-0 flex flex-col justify-end items-center text-center pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="container mx-auto px-4"
           >
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
               About One Big Family
             </h1>
-            <p className="text-xl text-white/90 max-w-2xl mx-auto mb-8">
+            <p className="text-xl text-white/90 max-w-2xl mx-auto">
               Building stronger communities through unity, support, and shared
               values
             </p>
           </motion.div>
         </div>
 
-        {/* Breadcrumbs */}
+        {/* Breadcrumbs at bottom */}
         <div className="absolute bottom-0 left-0 w-full bg-black/30 backdrop-blur-sm">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center text-white/90 text-sm">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="flex items-center text-white/90 text-sm"
+            >
               <Link
                 to="/"
                 className="hover:text-white flex items-center transition-colors"
@@ -47,13 +53,19 @@ const AboutPage = () => {
               </Link>
               <FaChevronRight className="mx-2 text-white/50" />
               <span className="text-white">About Us</span>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Main Content */}
-      <section className="py-20 bg-white">
+      <section className="py-20 relative overflow-hidden bg-white">
+        {/* Background Elements */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gray-50 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 opacity-70" />
+          <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gray-50 rounded-full blur-3xl transform translate-x-1/4 translate-y-1/4 opacity-70" />
+        </div>
+
         <div className="container mx-auto px-4">
           {/* Mission & Vision */}
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 mb-20">
@@ -150,7 +162,7 @@ const AboutPage = () => {
           </motion.div>
         </div>
       </section>
-    </main>
+    </>
   );
 };
 
