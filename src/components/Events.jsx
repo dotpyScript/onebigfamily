@@ -22,7 +22,7 @@ const Events = () => {
       location: 'Virtual Meeting',
       description:
         'Monthly community gathering to discuss upcoming projects and initiatives',
-      image: '/event_img/event1.jpg',
+      image: '/event_img/upcommingevent/event1.jpg',
       attendees: 45,
     },
     {
@@ -32,7 +32,7 @@ const Events = () => {
       location: 'Barracks Community Center',
       description:
         'Professional development workshop for members with industry experts',
-      image: '/event_img/event2.jpg',
+      image: '/event_img/upcommingevent/event2.jpg',
       attendees: 30,
     },
     {
@@ -42,7 +42,7 @@ const Events = () => {
       location: 'Army Barrack Central Mosque, Minna',
       description:
         'Empowering women in technology through mentorship, networking, and skill-building workshops. Join us for an inspiring day of learning and connection.',
-      image: '/event_img/event3.jpg',
+      image: '/event_img/upcommingevent/event3.jpg',
       attendees: 120,
     },
   ];
@@ -54,7 +54,7 @@ const Events = () => {
       time: '10:00 AM - 6:00 PM',
       location: 'Minna',
       description: "Community support for member's wedding ceremony",
-      image: '/event_img/event4.jpg',
+      image: '/event_img/pastevent/pastevent1.jpg',
       attendees: 85,
     },
     {
@@ -64,7 +64,7 @@ const Events = () => {
       location: 'Army Barrack Central Mosque, Minna',
       description:
         "Qur'anic recitation competition for members and non-members",
-      image: '/event_img/event5.jpg',
+      image: '/event_img/pastevent/pastevent2.jpg',
       attendees: 50,
     },
     {
@@ -73,13 +73,13 @@ const Events = () => {
       time: '9:00 AM - 3:00 PM',
       location: 'Minna',
       description: 'Health checkups and wellness activities for all members',
-      image: '/event_img/event6.jpg',
+      image: '/event_img/pastevent/pastevent3.jpg',
       attendees: 65,
     },
   ];
 
   return (
-    <section className="py-20 relative overflow-hidden bg-white" id="events">
+    <section className="py-20 relative overflow-hidden bg-white">
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gray-50 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 opacity-70" />

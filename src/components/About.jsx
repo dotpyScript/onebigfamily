@@ -109,10 +109,7 @@ const About = () => {
   ];
 
   return (
-    <section
-      className="relative py-24 overflow-hidden bg-white font-poppins"
-      id="about"
-    >
+    <section className="relative py-24 overflow-hidden bg-white font-poppins">
       <BristleBrush className="absolute top-10 right-10" />
 
       <div className="container mx-auto px-4">

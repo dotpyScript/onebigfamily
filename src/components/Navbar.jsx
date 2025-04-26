@@ -41,40 +41,42 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Impact', href: '#impact' },
-    { name: 'Membership', href: '#membership' },
-    { name: 'Events', href: '#events' },
+    { name: 'Home', href: '/home' },
+    { name: 'About', href: '/about' },
+    { name: 'Events', href: '/events' },
     { name: 'Contact', href: '/contact' },
   ];
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
-    const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
 
-    if (element) {
-      // Get dimensions
-      const navHeight = 80; // Height of the navbar
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - navHeight;
+    if (href.startsWith('#')) {
+      const targetId = href.substring(1);
+      const element = document.getElementById(targetId);
 
-      // Close mobile menu first
-      setIsOpen(false);
+      if (element) {
+        // Get dimensions
+        const navHeight = 80; // Height of the navbar
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - navHeight;
 
-      // Small delay to allow mobile menu to close
-      setTimeout(() => {
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth',
-        });
-        setActiveSection(targetId);
-      }, 100);
+        // Close mobile menu first
+        setIsOpen(false);
+
+        // Small delay to allow mobile menu to close
+        setTimeout(() => {
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+          setActiveSection(targetId);
+        }, 100);
+      }
     } else if (href.startsWith('/')) {
       // Handle absolute paths
       navigate(href);
       setIsOpen(false);
+      setActiveSection(''); // Clear active section when navigating to a new page
     }
   };
 
@@ -104,7 +106,7 @@ const Navbar = () => {
             className="flex-shrink-0"
           >
             <a
-              href="#home"
+              href="/home"
               onClick={(e) => handleNavClick(e, '#home')}
               className="block hover:opacity-80 transition-opacity"
             >
