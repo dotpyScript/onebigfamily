@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaWhatsapp,
   FaFacebook,
@@ -11,6 +12,14 @@ import {
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+
+  const quickLinks = [
+    { name: 'Home', path: '/' },
+    { name: 'About Us', path: '/about' },
+    { name: 'Events', path: '/events' },
+    { name: 'Contact', path: '/contact' },
+    { name: 'Donate', path: '/donate' },
+  ];
 
   return (
     <footer className="bg-black text-white">
@@ -31,18 +40,16 @@ const Footer = () => {
               Quick Links
             </h3>
             <ul className="space-y-2">
-              {['Home', 'Services', 'About Us', 'Our Impact', 'Contact'].map(
-                (link) => (
-                  <li key={link}>
-                    <a
-                      href={`#${link.toLowerCase().replace(' ', '-')}`}
-                      className="text-gray-400 hover:text-white transition-colors"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                )
-              )}
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    className="text-gray-400 hover:text-white transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -62,7 +69,7 @@ const Footer = () => {
               <li className="flex items-center text-gray-400">
                 <FaPhone className="mr-2" />
                 <a
-                  href="tel:+2341234567890"
+                  href="tel:+2348109919244"
                   className="hover:text-white transition-colors"
                 >
                   +234 8109919244
@@ -76,10 +83,26 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               {[
-                { icon: FaWhatsapp, label: 'WhatsApp' },
-                { icon: FaFacebook, label: 'Facebook' },
-                { icon: FaTwitter, label: 'Twitter' },
-                { icon: FaInstagram, label: 'Instagram' },
+                {
+                  icon: FaWhatsapp,
+                  label: 'WhatsApp',
+                  href: 'https://chat.whatsapp.com/C06Vg8cIrX33baQJbEBVOO',
+                },
+                {
+                  icon: FaFacebook,
+                  label: 'Facebook',
+                  href: '#',
+                },
+                {
+                  icon: FaTwitter,
+                  label: 'Twitter',
+                  href: '#',
+                },
+                {
+                  icon: FaInstagram,
+                  label: 'Instagram',
+                  href: '#',
+                },
                 {
                   icon: FaCode,
                   label: 'Developer',
@@ -88,7 +111,7 @@ const Footer = () => {
               ].map((social) => (
                 <a
                   key={social.label}
-                  href={social.href || '#'}
+                  href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
