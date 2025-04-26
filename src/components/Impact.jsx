@@ -1,11 +1,13 @@
-import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaQuoteLeft,
   FaMapMarkerAlt,
   FaChevronRight,
   FaChevronLeft,
-} from "react-icons/fa";
+  FaUser,
+} from 'react-icons/fa';
+import OptimizedImage from './OptimizedImage';
 
 const Impact = () => {
   const [currentStory, setCurrentStory] = useState(0);
@@ -19,31 +21,28 @@ const Impact = () => {
 
   const successStories = [
     {
-      image:
-        "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=1000&auto=format&fit=crop",
-      name: "John D.",
-      role: "Student",
+      image: '/impact_img/impact1.jpg',
+      name: 'Bashir Majiyebo Umar',
+      role: 'President',
       story:
-        "Thanks to the community's support, I was able to complete my education and secure a job in the civil service. The financial assistance came at a crucial time in my life.",
-      location: "Lagos",
+        "We're community's support. May Allah bless each and every one of you for your kindness and well wishes. Together, we'll achieve remarkable success and outstanding results.",
+      location: 'Minna',
     },
     {
-      image:
-        "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1000&auto=format&fit=crop",
-      name: "Sarah M.",
-      role: "Entrepreneur",
+      image: '/impact_img/impact2.jpg',
+      name: 'Attahiru Saminu.',
+      role: 'Secretary',
       story:
-        "The monthly contributions helped me start my small business. Now I'm able to support my family better and even employ two people from our community.",
-      location: "Abuja",
+        'We are deeply grateful for the monthly contributions that have empowered us to extend a helping hand to those in need throughout the holy month of Ramadan, bringing hope, relief and joy to countless individuals and families.',
+      location: 'Katsina',
     },
     {
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1000&auto=format&fit=crop",
-      name: "Michael T.",
-      role: "Civil Servant",
+      image: '/impact_img/impact3.jpg',
+      name: 'Abdulrahman Muhammad',
+      role: 'Fin. Secretary',
       story:
-        "When I needed emergency medical assistance, the community came together to support me financially. I wouldn't have been able to afford the treatment without them.",
-      location: "Port Harcourt",
+        'My deepest appreciation goes to One Big Muslim Family for their unwavering support and love as i embark on this new chapter of life. Your contributions, well wishes, and presence at my wedding ceremony have truly made it a celebration to cherish forever.',
+      location: 'Kebbi',
     },
   ];
 
@@ -74,10 +73,10 @@ const Impact = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6 text-black">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-black">
             Success Stories
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover how our community has transformed lives through unity,
             support, and genuine care. These are the stories of real people
             whose lives have been changed.
@@ -100,14 +99,15 @@ const Impact = () => {
                     <div className="md:col-span-2">
                       <div className="relative">
                         <div className="aspect-square rounded-2xl overflow-hidden">
-                          <img
+                          <OptimizedImage
                             src={successStories[currentStory].image}
                             alt={successStories[currentStory].name}
-                            className="w-full h-full object-cover"
+                            className="w-full h-full"
+                            fallbackSrc="/images/profile-fallback.jpg"
                           />
                         </div>
-                        <div className="absolute -bottom-5 -right-5 w-24 h-24 rounded-full bg-black flex items-center justify-center text-white p-5">
-                          <FaQuoteLeft className="text-4xl" />
+                        <div className="absolute -bottom-3 -right-3 sm:-bottom-4 sm:-right-4 md:-bottom-5 md:-right-5 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full bg-black flex items-center justify-center text-white p-3 sm:p-4 md:p-5 transform hover:scale-105 transition-transform">
+                          <FaQuoteLeft className="text-2xl sm:text-3xl md:text-4xl" />
                         </div>
                       </div>
                     </div>
@@ -169,14 +169,14 @@ const Impact = () => {
               key={index}
               onClick={() => setCurrentStory(index)}
               className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentStory === index ? "bg-black w-8" : "bg-gray-300"
+                currentStory === index ? 'bg-black w-8' : 'bg-gray-300'
               }`}
             />
           ))}
         </div>
 
         <div className="mt-12">
-          <h3 className="text-2xl font-bold mb-6 text-center text-black">
+          <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-center text-black">
             More Success Stories
           </h3>
           <div className="grid md:grid-cols-3 gap-6">
@@ -185,8 +185,8 @@ const Impact = () => {
                 key={index}
                 className={`rounded-xl border border-gray-100 transform transition-all duration-500 cursor-pointer ${
                   currentStory === index
-                    ? "scale-105 shadow-xl z-10"
-                    : "scale-100 opacity-80"
+                    ? 'scale-105 shadow-xl z-10'
+                    : 'scale-100 opacity-80'
                 }`}
                 onClick={() => setCurrentStory(index)}
                 animate={{
@@ -203,10 +203,11 @@ const Impact = () => {
                 <div className="bg-white rounded-lg p-4 h-full">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-12 h-12 rounded-full overflow-hidden">
-                      <img
+                      <OptimizedImage
                         src={story.image}
                         alt={story.name}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full"
+                        fallbackSrc="/images/profile-fallback.jpg"
                       />
                     </div>
                     <div>

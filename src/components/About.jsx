@@ -129,12 +129,11 @@ const About = () => {
             >
               <div className="relative rounded-3xl overflow-hidden shadow-lg">
                 <img
-                  src="https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=1470&auto=format&fit=crop"
+                  src="/about_img/about2.jpg"
                   alt="Community Support"
                   className="w-full h-[600px] object-cover"
                   onError={(e) => {
-                    e.target.src =
-                      'https://images.unsplash.com/photo-1559027615-cd4628902d4a?q=80&w=1470&auto=format&fit=crop';
+                    e.target.src = '/about_img/about1.jpg';
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>

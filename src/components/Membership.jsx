@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
 import {
   FaCheckCircle,
   FaUserPlus,
@@ -7,24 +7,24 @@ import {
   FaUsersCog,
   FaCrown,
   FaArrowRight,
-} from "react-icons/fa";
+} from 'react-icons/fa';
 
 const Membership = () => {
   const benefits = [
     {
       icon: <FaHandshake />,
-      title: "Financial Support",
-      description: "Access to community funds for life events and emergencies",
+      title: 'Financial Support',
+      description: 'Access to community funds for life events and emergencies',
     },
     {
       icon: <FaUsersCog />,
-      title: "Networking",
-      description: "Connect with professionals across different sectors",
+      title: 'Networking',
+      description: 'Connect with professionals across different sectors',
     },
     {
       icon: <FaUserPlus />,
-      title: "Career Growth",
-      description: "Job opportunities and professional development",
+      title: 'Career Growth',
+      description: 'Job opportunities and professional development',
     },
   ];
 
@@ -47,10 +47,10 @@ const Membership = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-5xl font-bold mb-6 text-black">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-black">
             Membership & Benefits
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Be part of a thriving community that supports and uplifts each
             other. Your journey to success starts here.
           </p>
@@ -69,7 +69,9 @@ const Membership = () => {
               <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
                 <FaCrown className="text-4xl text-yellow-400" />
               </div>
-              <h3 className="text-2xl font-bold mb-6">Community Membership</h3>
+              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-black">
+                Community Membership
+              </h3>
               <div className="mb-8">
                 <div className="flex items-baseline gap-2 mb-4">
                   <span className="text-4xl font-bold">₦1,000</span>
@@ -137,7 +139,7 @@ const Membership = () => {
               viewport={{ once: true }}
               className="bg-gray-50 rounded-2xl p-6 md:col-span-2"
             >
-              <h3 className="text-xl font-bold mb-4 text-black">
+              <h3 className="text-lg sm:text-xl font-bold mb-4 text-black">
                 Payment Methods
               </h3>
               <div className="grid grid-cols-3 gap-4">

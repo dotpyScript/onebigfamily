@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
+import OptimizedImage from './OptimizedImage';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -93,10 +94,15 @@ const Navbar = () => {
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className="text-2xl sm:text-3xl font-bold text-white tracking-tight hover:opacity-80 transition-opacity"
+              className="block hover:opacity-80 transition-opacity"
             >
-              <span className="border-b-2 border-gray-400">One</span> Big Happy
-              Family
+              <OptimizedImage
+                src="/logo.png"
+                alt="One Big Happy Family Logo"
+                className="h-12 sm:h-14 w-auto"
+                fallbackSrc="/images/logo-fallback.png"
+                makeWhite={true}
+              />
             </a>
           </motion.div>
 
