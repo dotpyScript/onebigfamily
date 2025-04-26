@@ -8,6 +8,7 @@ import {
   FaHandshake,
 } from 'react-icons/fa';
 import CountUp from 'react-countup';
+import BristleBrush from './BristleBrush';
 
 const StatItem = memo(
   ({ number, prefix = '', suffix = '', label, showDivider, decimals = 0 }) => (
@@ -39,13 +40,22 @@ const FeatureCard = memo(({ icon: Icon, title, description, delay }) => (
     viewport={{ once: true }}
     className="relative group"
   >
-    <div className="flex items-start gap-6 bg-white rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 h-full">
-      <div className="bg-gray-50 p-4 rounded-xl flex-shrink-0">
-        <Icon className="text-2xl text-gray-700" />
+    <div className="flex flex-row lg:flex-col items-start gap-4 md:gap-6 bg-white rounded-2xl p-4 md:p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 h-full">
+      <div className="lg:flex lg:items-center lg:w-full lg:gap-4">
+        <div className="bg-gray-50 p-3 md:p-4 rounded-xl flex-shrink-0">
+          <Icon className="text-xl md:text-2xl text-gray-700" />
+        </div>
+        <h3 className="hidden lg:block text-lg md:text-xl font-semibold text-gray-800">
+          {title}
+        </h3>
       </div>
-      <div>
-        <h3 className="text-xl font-semibold mb-2 text-gray-800">{title}</h3>
-        <p className="text-gray-600 leading-relaxed">{description}</p>
+      <div className="flex-1 lg:w-full">
+        <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 lg:hidden">
+          {title}
+        </h3>
+        <p className="text-sm md:text-base text-gray-600 leading-relaxed lg:mt-3">
+          {description}
+        </p>
       </div>
     </div>
   </motion.div>
@@ -103,35 +113,7 @@ const About = () => {
       className="relative py-24 overflow-hidden bg-white font-poppins"
       id="about"
     >
-      {/* Bristle Animation */}
-      <motion.div
-        className="absolute top-10 right-10 w-24 h-24 opacity-20"
-        animate={{
-          y: [-10, 10],
-          rotate: [0, 5, -5, 0],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          repeatType: 'reverse',
-          ease: 'easeInOut',
-        }}
-      >
-        <div className="w-full h-full relative">
-          {[...Array(8)].map((_, index) => (
-            <div
-              key={index}
-              className="absolute w-1 bg-black"
-              style={{
-                height: '100%',
-                left: `${index * 3}px`,
-                transform: `rotate(${index * 5}deg)`,
-                transformOrigin: 'bottom',
-              }}
-            />
-          ))}
-        </div>
-      </motion.div>
+      <BristleBrush className="absolute top-10 right-10" />
 
       <div className="container mx-auto px-4">
         {/* First Row - Two Columns */}
@@ -269,7 +251,7 @@ const About = () => {
         </div>
 
         {/* Second Row - Feature Cards */}
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {features.map((feature, index) => (
             <FeatureCard key={index} {...feature} />
           ))}

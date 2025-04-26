@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   FaWhatsapp,
   FaFacebook,
@@ -6,7 +6,8 @@ import {
   FaInstagram,
   FaEnvelope,
   FaPhone,
-} from "react-icons/fa";
+  FaCode,
+} from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -30,11 +31,11 @@ const Footer = () => {
               Quick Links
             </h3>
             <ul className="space-y-2">
-              {["Home", "Services", "About Us", "Our Impact", "Contact"].map(
+              {['Home', 'Services', 'About Us', 'Our Impact', 'Contact'].map(
                 (link) => (
                   <li key={link}>
                     <a
-                      href={`#${link.toLowerCase().replace(" ", "-")}`}
+                      href={`#${link.toLowerCase().replace(' ', '-')}`}
                       className="text-gray-400 hover:text-white transition-colors"
                     >
                       {link}
@@ -55,7 +56,7 @@ const Footer = () => {
                   href="mailto:info@onebighappyfamily.com"
                   className="hover:text-white transition-colors"
                 >
-                  info@onebighappyfamily.com
+                  Abbasmahmud@gmail.com
                 </a>
               </li>
               <li className="flex items-center text-gray-400">
@@ -64,7 +65,7 @@ const Footer = () => {
                   href="tel:+2341234567890"
                   className="hover:text-white transition-colors"
                 >
-                  +234 123 456 7890
+                  +234 8109919244
                 </a>
               </li>
             </ul>
@@ -75,14 +76,21 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
               {[
-                { icon: FaWhatsapp, label: "WhatsApp" },
-                { icon: FaFacebook, label: "Facebook" },
-                { icon: FaTwitter, label: "Twitter" },
-                { icon: FaInstagram, label: "Instagram" },
+                { icon: FaWhatsapp, label: 'WhatsApp' },
+                { icon: FaFacebook, label: 'Facebook' },
+                { icon: FaTwitter, label: 'Twitter' },
+                { icon: FaInstagram, label: 'Instagram' },
+                {
+                  icon: FaCode,
+                  label: 'Developer',
+                  href: 'https://wa.me/+2348109919244',
+                },
               ].map((social) => (
                 <a
                   key={social.label}
-                  href="#"
+                  href={social.href || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors"
                   aria-label={social.label}
                 >

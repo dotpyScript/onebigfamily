@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { motion } from 'framer-motion';
 import {
   FaWhatsapp,
   FaFacebook,
@@ -9,7 +9,9 @@ import {
   FaEnvelope,
   FaPhone,
   FaMapMarkerAlt,
-} from "react-icons/fa";
+  FaCode,
+} from 'react-icons/fa';
+import BristleBrush from './BristleBrush';
 
 const Contact = () => {
   return (
@@ -19,6 +21,8 @@ const Contact = () => {
         <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-gray-50 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2 opacity-70" />
         <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-gray-50 rounded-full blur-3xl transform translate-x-1/4 translate-y-1/4 opacity-70" />
       </div>
+
+      <BristleBrush className="absolute top-10 right-10" />
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -54,10 +58,10 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Phone</h3>
                     <a
-                      href="tel:+2341234567890"
+                      href="tel:+2348109919244"
                       className="text-gray-600 hover:text-black transition-colors"
                     >
-                      +234 123 456 7890
+                      +234 8109919244
                     </a>
                   </div>
                 </div>
@@ -71,7 +75,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Email</h3>
                     <a
-                      href="mailto:info@onebighappyfamily.com"
+                      href="mailto:abbasmahmud0@gmail.com"
                       className="text-gray-600 hover:text-black transition-colors"
                     >
                       info@onebighappyfamily.com
@@ -88,7 +92,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-lg mb-1">Location</h3>
                     <p className="text-gray-600">
-                      Barracks Community, Lagos, Nigeria
+                      Army Barracks, Minna, Niger State, Nigeria
                     </p>
                   </div>
                 </div>
@@ -101,31 +105,43 @@ const Contact = () => {
                   {[
                     {
                       icon: FaWhatsapp,
-                      label: "WhatsApp",
-                      color: "hover:bg-green-500",
+                      label: 'WhatsApp',
+                      color: 'hover:bg-green-500',
+                      href: 'https://chat.whatsapp.com/C06Vg8clrX33baQJbEBVOO',
                     },
                     {
                       icon: FaFacebook,
-                      label: "Facebook",
-                      color: "hover:bg-blue-600",
+                      label: 'Facebook',
+                      color: 'hover:bg-blue-600',
                     },
                     {
                       icon: FaTwitter,
-                      label: "Twitter",
-                      color: "hover:bg-blue-400",
+                      label: 'Twitter',
+                      color: 'hover:bg-blue-400',
                     },
                     {
                       icon: FaInstagram,
-                      label: "Instagram",
-                      color: "hover:bg-pink-600",
+                      label: 'Instagram',
+                      color: 'hover:bg-pink-600',
+                    },
+                    {
+                      icon: FaCode,
+                      label: 'Developer',
+                      color: 'hover:bg-purple-600',
+                      href: 'https://wa.me/+2348109919244',
+                      span: 'col-span-2',
                     },
                   ].map((social) => (
                     <motion.a
                       key={social.label}
-                      href="#"
+                      href={social.href || '#'}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className={`flex items-center gap-2 p-3 bg-white/10 rounded-xl ${social.color} transition-colors`}
+                      className={`flex items-center gap-2 p-3 bg-white/10 rounded-xl ${
+                        social.color
+                      } transition-colors ${social.span || ''}`}
                     >
                       <social.icon className="text-xl" />
                       <span className="text-sm font-medium">
@@ -154,7 +170,7 @@ const Contact = () => {
                     <input
                       type="text"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-1 focus:ring-black transition-colors"
-                      placeholder="John Doe"
+                      placeholder="Abbas Mahmud"
                     />
                   </div>
                   <div>
@@ -164,7 +180,7 @@ const Contact = () => {
                     <input
                       type="email"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-black focus:ring-1 focus:ring-black transition-colors"
-                      placeholder="john@example.com"
+                      placeholder="abc@example.com"
                     />
                   </div>
                 </div>
