@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FaBars, FaTimes } from 'react-icons/fa';
 import OptimizedImage from './OptimizedImage';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const navigate = useNavigate();
 
   // Handle scroll effect and active section
   useEffect(() => {
@@ -72,6 +74,12 @@ const Navbar = () => {
     }
   };
 
+  const handleDonateClick = (e) => {
+    e.preventDefault();
+    navigate('/donate');
+    setIsOpen(false);
+  };
+
   return (
     <motion.nav
       initial={{ y: -100 }}
@@ -134,6 +142,7 @@ const Navbar = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
+              onClick={handleDonateClick}
               className="ml-4 px-6 py-2 bg-white text-black text-base lg:text-lg font-semibold tracking-wider rounded-full hover:bg-gray-200 transition-all duration-300 shadow-lg hover:shadow-xl"
             >
               Donate
@@ -206,6 +215,7 @@ const Navbar = () => {
             <div className="px-4 py-4">
               <motion.button
                 whileTap={{ scale: 0.98 }}
+                onClick={handleDonateClick}
                 className="w-full py-3 bg-white text-black text-lg font-semibold tracking-wider rounded-full hover:bg-gray-200 transition-all duration-300 shadow-lg"
               >
                 Donate Now
