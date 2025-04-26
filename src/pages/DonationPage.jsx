@@ -16,7 +16,7 @@ const DonationPage = () => {
     },
     {
       bankName: 'GTBank',
-      accountNumber: '0123456789',
+      accountNumber: '0246691878',
       accountName: 'Maryam Muhammad Erena',
       description: 'For specific project funding and initiatives',
     },
