@@ -63,6 +63,31 @@ const Footer = () => {
                   href="mailto:info@onebighappyfamily.com"
                   className="hover:text-white transition-colors"
                 >
+                  info@onebighappyfamily.com
+                </a>
+              </li>
+              <li className="flex items-center text-gray-400">
+                <FaPhone className="mr-2" />
+                <a
+                  href="tel:+2349158086565"
+                  className="hover:text-white transition-colors"
+                >
+                  +234 9158086565
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Developer */}
+          <div>
+            <h3 className="text-xl font-bold mb-4">Contact Developer</h3>
+            <ul className="space-y-2">
+              <li className="flex items-center text-gray-400">
+                <FaEnvelope className="mr-2" />
+                <a
+                  href="mailto:abbasmahmud0@gmail.com"
+                  className="hover:text-white transition-colors"
+                >
                   Abbasmahmud@gmail.com
                 </a>
               </li>
