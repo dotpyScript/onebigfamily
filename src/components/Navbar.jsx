@@ -46,7 +46,7 @@ const Navbar = () => {
     { name: 'Impact', href: '#impact' },
     { name: 'Membership', href: '#membership' },
     { name: 'Events', href: '#events' },
-    { name: 'Contact', href: '#contact' },
+    { name: 'Contact', href: '/contact' },
   ];
 
   const handleNavClick = (e, href) => {
@@ -71,6 +71,10 @@ const Navbar = () => {
         });
         setActiveSection(targetId);
       }, 100);
+    } else if (href.startsWith('/')) {
+      // Handle absolute paths
+      navigate(href);
+      setIsOpen(false);
     }
   };
 

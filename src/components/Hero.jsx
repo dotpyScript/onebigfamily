@@ -174,7 +174,9 @@ const Hero = () => {
                 className="flex flex-col sm:flex-row gap-4 justify-center pt-2"
               >
                 <a
-                  href="#join"
+                  href="https://chat.whatsapp.com/C06Vg8cIrX33baQJbEBVOO"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="group px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-all duration-300 shadow-lg flex items-center justify-center gap-3 text-lg"
                 >
                   Join Our Community

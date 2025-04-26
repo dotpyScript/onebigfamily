@@ -80,7 +80,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 bg-white relative overflow-hidden" id="contact">
+    <section className="py-20 bg-white relative overflow-hidden">
       <ToastContainer />
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

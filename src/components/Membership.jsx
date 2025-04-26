@@ -102,6 +102,13 @@ const Membership = () => {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() =>
+                  window.open(
+                    'https://chat.whatsapp.com/C06Vg8cIrX33baQJbEBVOO',
+                    '_blank',
+                    'noopener,noreferrer'
+                  )
+                }
                 className="w-full bg-white text-black rounded-full py-4 px-6 font-semibold flex items-center justify-center gap-2 group"
               >
                 Join Now

@@ -237,7 +237,9 @@ const About = () => {
               className="mb-6"
             >
               <motion.a
-                href="#join"
+                href="https://chat.whatsapp.com/C06Vg8cIrX33baQJbEBVOO"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}

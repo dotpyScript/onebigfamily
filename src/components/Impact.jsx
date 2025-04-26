@@ -131,6 +131,13 @@ const Impact = () => {
                         className="px-6 py-3 bg-black text-white rounded-full hover:bg-gray-800 transition-all"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.98 }}
+                        onClick={() =>
+                          window.open(
+                            'https://chat.whatsapp.com/C06Vg8cIrX33baQJbEBVOO',
+                            '_blank',
+                            'noopener,noreferrer'
+                          )
+                        }
                       >
                         Join Our Community
                       </motion.button>
