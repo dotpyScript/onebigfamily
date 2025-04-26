@@ -9,15 +9,15 @@ const DonationPage = () => {
 
   const accounts = [
     {
-      bankName: 'First Bank',
-      accountNumber: '3456789012',
-      accountName: 'One Big Family Foundation',
+      bankName: 'GTBank',
+      accountNumber: '0246691878',
+      accountName: 'Maryam Muhammad Erena',
       description: 'For general donations and community support',
     },
     {
       bankName: 'GTBank',
       accountNumber: '0123456789',
-      accountName: 'One Big Family Projects',
+      accountName: 'Maryam Muhammad Erena',
       description: 'For specific project funding and initiatives',
     },
   ];
