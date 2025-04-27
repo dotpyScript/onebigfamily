@@ -42,7 +42,7 @@ const ContactPage = () => {
             </h1>
             <p className="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed">
               Have questions or want to join our community? We're here to help
-              and answer any questions you may have.
+              and answer any question.
             </p>
           </motion.div>
         </div>
