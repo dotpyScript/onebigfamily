@@ -124,7 +124,7 @@ const Impact = () => {
                       <p className="text-xl text-gray-600 mb-6">
                         {successStories[currentStory].role}
                       </p>
-                      <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                      <p className="text-gray-600 text-base sm:text-lg leading-relaxed mb-6 text-justify hyphens-auto">
                         "{successStories[currentStory].story}"
                       </p>
                       <motion.button
@@ -222,7 +222,7 @@ const Impact = () => {
                       <p className="text-gray-600 text-sm">{story.role}</p>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm line-clamp-3">
+                  <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 text-justify hyphens-auto">
                     "{story.story}"
                   </p>
                 </div>
