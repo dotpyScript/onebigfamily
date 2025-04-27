@@ -41,7 +41,7 @@ const Impact = () => {
       name: 'Abdulrahman Muhammad',
       role: 'Fin. Secretary',
       story:
-        'My deepest appreciation goes to One Big Muslim Family for their unwavering support and love as i embark on this new chapter of life. Your contributions, well wishes, and presence at my wedding ceremony have truly made it a celebration to cherish forever.',
+        'With the help of our unity, we have severally come together to support ourselves one way or the other in conjugal bliss. It si indeed a thing to be proud of to all of us.',
       location: 'Kebbi',
     },
   ];
