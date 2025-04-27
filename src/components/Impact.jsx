@@ -41,7 +41,7 @@ const Impact = () => {
       name: 'Abdulrahman Muhammad',
       role: 'Fin. Secretary',
       story:
-        'With the help of our unity, we have severally come together to support ourselves one way or the other in conjugal bliss. It si indeed a thing to be proud of to all of us.',
+        'With the help of our unity, we have severally come together to support ourselves one way or the other in conjugal bliss. It is indeed a thing to be proud of to all of us.',
       location: 'Kebbi',
     },
   ];
