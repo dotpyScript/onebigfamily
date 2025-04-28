@@ -8,11 +8,13 @@ import DonationPage from './pages/DonationPage';
 import ContactPage from './pages/ContactPage';
 import EventPage from './pages/EventPage';
 import AboutPage from './pages/AboutPage';
+import ScrollToTop from './components/ScrollToTop';
 
 const App = () => {
   return (
     <Router>
       <div className="App">
+        <ScrollToTop />
         <CustomCursor />
         <Navbar />
         <main>

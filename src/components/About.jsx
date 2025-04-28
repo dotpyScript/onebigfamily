@@ -67,19 +67,19 @@ const About = () => {
 
   const stats = [
     {
-      number: 12450,
+      number: 1000,
       suffix: '+',
       label: 'Active Members',
     },
     {
-      number: 12.4,
+      number: 1.1,
       prefix: '₦',
       suffix: 'M+',
       label: 'Monthly Pool',
       decimals: 1,
     },
     {
-      number: 5423,
+      number: 523,
       label: 'Lives Impacted',
     },
   ];

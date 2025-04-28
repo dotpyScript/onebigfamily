@@ -13,7 +13,7 @@ const Hero = () => {
   const [currentAdjectiveIndex, setCurrentAdjectiveIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
-  const targetCount = 5423; // Number of people helped
+  const targetCount = 523; // Number of people helped
   const incrementSpeed = 35; // Lower is faster
   const communityAdjectives = [
     ' Stronger',
@@ -107,7 +107,7 @@ const Hero = () => {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center bg-white/5 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 shadow-lg"
+                className="hidden sm:inline-flex items-center bg-white/5 backdrop-blur-sm px-4 py-2 rounded-full border border-white/10 shadow-lg"
               >
                 <FaHandHoldingHeart className="text-white mr-2" />
                 <span className="text-white/90 font-medium">
