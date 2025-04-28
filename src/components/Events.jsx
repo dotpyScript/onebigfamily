@@ -18,7 +18,7 @@ const Events = () => {
   const upcomingEvents = [
     {
       title: 'Community Meetup',
-      date: 'May 15, 2024',
+      date: 'Aug 15, 2025',
       time: '2:00 PM - 4:00 PM',
       location: 'Virtual Meeting',
       description:
@@ -28,7 +28,7 @@ const Events = () => {
     },
     {
       title: 'Career Workshop',
-      date: 'June 5, 2024',
+      date: 'July 25, 2024',
       time: '10:00 AM - 1:00 PM',
       location: 'Barracks Community Center',
       description:
@@ -38,7 +38,7 @@ const Events = () => {
     },
     {
       title: 'Women In Tech',
-      date: 'June 12, 2025',
+      date: 'July 15, 2025',
       time: '11:00 AM - 3:00 PM',
       location: 'Army Barrack Central Mosque, Minna',
       description:
@@ -60,7 +60,7 @@ const Events = () => {
     },
     {
       title: "Qur'anic Recitation Competition",
-      date: 'December 20, 2024',
+      date: 'Jan 01, 2025',
       time: '9:00 AM - 1:00 PM',
       location: 'Army Barrack Central Mosque, Minna',
       description:
@@ -70,7 +70,7 @@ const Events = () => {
     },
     {
       title: 'Health & Wellness Day',
-      date: 'February 15, 2025',
+      date: 'Dec 15, 2024',
       time: '9:00 AM - 3:00 PM',
       location: 'Minna',
       description: 'Health checkups and wellness activities for all members',

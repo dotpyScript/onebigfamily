@@ -15,7 +15,7 @@ const EventPage = () => {
     {
       id: 1,
       title: 'Community Meetup',
-      date: 'May 15, 2024',
+      date: '2025-08-15',
       time: '2:00 PM - 4:00 PM',
       location: 'Virtual Meeting',
       image: '/event_img/upcommingevent/event1.jpg',
@@ -25,7 +25,7 @@ const EventPage = () => {
     {
       id: 2,
       title: 'Career Workshop',
-      date: 'June 5, 2024',
+      date: '2025-07-25',
       time: '10:00 AM - 1:00 PM',
       location: 'Barracks Community Center',
       image: '/event_img/upcommingevent/event2.jpg',
@@ -35,7 +35,7 @@ const EventPage = () => {
     {
       id: 3,
       title: 'Women In Tech',
-      date: 'June 12, 2025',
+      date: '2025-07-15',
       time: '11:00 AM - 3:00 PM',
       location: 'Army Barrack Central Mosque, Minna',
       image: '/event_img/upcommingevent/event3.jpg',
@@ -46,7 +46,7 @@ const EventPage = () => {
     {
       id: 4,
       title: 'Community Health Fair',
-      date: '2024-05-15',
+      date: '2025-06-20',
       time: '10:00 AM - 4:00 PM',
       location: 'Central Community Center',
       image: '/event_img/upcommingevent/event9.jpg',
@@ -56,7 +56,7 @@ const EventPage = () => {
     {
       id: 5,
       title: 'Youth Leadership Workshop',
-      date: '2024-05-20',
+      date: '2024-06-15',
       time: '2:00 PM - 5:00 PM',
       location: 'Tech Innovation Hub',
       image: '/event_img/upcommingevent/event14.jpg',
@@ -65,7 +65,7 @@ const EventPage = () => {
     {
       id: 6,
       title: 'Family Fun Day',
-      date: '2024-06-01',
+      date: '2024-06-07',
       time: '11:00 AM - 6:00 PM',
       location: 'City Park',
       image: '/event_img/upcommingevent/event11.jpg',
@@ -78,7 +78,7 @@ const EventPage = () => {
     {
       id: 1,
       title: 'Wedding Support',
-      date: 'April 18, 2025',
+      date: '2025-04-18',
       time: '10:00 AM - 6:00 PM',
       location: 'Minna',
       image: '/event_img/pastevent/pastevent1.jpg',
@@ -87,7 +87,7 @@ const EventPage = () => {
     {
       id: 2,
       title: "Qur'anic Recitation Competition",
-      date: 'December 20, 2024',
+      date: '2025-01-25',
       time: '9:00 AM - 1:00 PM',
       location: 'Army Barrack Central Mosque, Minna',
       image: '/event_img/pastevent/pastevent2.jpg',
@@ -97,7 +97,7 @@ const EventPage = () => {
     {
       id: 3,
       title: 'Health & Wellness Day',
-      date: 'February 15, 2025',
+      date: '2024-12-15',
       time: '9:00 AM - 3:00 PM',
       location: 'Minna',
       image: '/event_img/pastevent/pastevent3.jpg',
