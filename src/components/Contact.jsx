@@ -58,9 +58,11 @@ const Contact = () => {
         autoClose: 5000,
         closeButton: true,
         style: {
-          background: '#10B981',
+          background: '#000000',
           color: 'white',
+          borderLeft: '4px solid #10B981',
         },
+        icon: '🎉',
       });
 
       // Clear form
