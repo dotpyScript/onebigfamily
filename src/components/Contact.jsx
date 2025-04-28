@@ -57,6 +57,10 @@ const Contact = () => {
         isLoading: false,
         autoClose: 5000,
         closeButton: true,
+        style: {
+          background: '#10B981',
+          color: 'white',
+        },
       });
 
       // Clear form
