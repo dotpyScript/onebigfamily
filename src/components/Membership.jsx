@@ -65,38 +65,50 @@ const Membership = () => {
             viewport={{ once: true }}
             className="lg:col-span-1"
           >
-            <div className="relative bg-black text-white rounded-3xl p-8 h-full">
+            <div className="relative bg-black text-white rounded-3xl p-6 sm:p-8 flex flex-col h-full">
               <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
-                <FaCrown className="text-4xl text-yellow-400" />
+                <FaCrown className="text-3xl sm:text-4xl text-yellow-400" />
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-black">
-                Community Membership
-              </h3>
-              <div className="mb-8">
-                <div className="flex items-baseline gap-2 mb-4">
-                  <span className="text-4xl font-bold">₦1,000</span>
-                  <span className="text-gray-400">/month</span>
+              <div className="flex-1">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 text-white">
+                  Community Membership
+                </h3>
+                <div className="mb-8">
+                  <div className="flex items-baseline gap-2 mb-2">
+                    <span className="text-3xl sm:text-4xl font-bold">
+                      ₦1,000
+                    </span>
+                    <span className="text-gray-400">/month</span>
+                  </div>
+                  <p className="text-gray-400 text-sm sm:text-base">
+                    Invest in your future and community
+                  </p>
                 </div>
-                <p className="text-gray-400">
-                  Invest in your future and community
-                </p>
-              </div>
-              <div className="space-y-4 mb-8">
-                <div className="flex items-center gap-3">
-                  <FaCheckCircle className="text-white text-lg flex-shrink-0" />
-                  <span>Access to community funds</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaCheckCircle className="text-white text-lg flex-shrink-0" />
-                  <span>Emergency financial support</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaCheckCircle className="text-white text-lg flex-shrink-0" />
-                  <span>Professional networking</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <FaCheckCircle className="text-white text-lg flex-shrink-0" />
-                  <span>Career development opportunities</span>
+                <div className="space-y-8 mb-3">
+                  <div className="flex items-center gap-3">
+                    <FaCheckCircle className="text-white text-base sm:text-lg flex-shrink-0" />
+                    <span className="text-sm sm:text-base">
+                      Access to community funds
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <FaCheckCircle className="text-white text-base sm:text-lg flex-shrink-0" />
+                    <span className="text-sm sm:text-base">
+                      Emergency financial support
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <FaCheckCircle className="text-white text-base sm:text-lg flex-shrink-0" />
+                    <span className="text-sm sm:text-base">
+                      Professional networking
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <FaCheckCircle className="text-white text-base sm:text-lg flex-shrink-0" />
+                    <span className="text-sm sm:text-base">
+                      Career development opportunities
+                    </span>
+                  </div>
                 </div>
               </div>
               <motion.button
@@ -109,7 +121,7 @@ const Membership = () => {
                     'noopener,noreferrer'
                   )
                 }
-                className="w-full bg-white text-black rounded-full py-4 px-6 font-semibold flex items-center justify-center gap-2 group"
+                className="w-full bg-white text-black rounded-full py-3 sm:py-4 px-6 font-semibold flex items-center justify-center gap-2 group mt-auto"
               >
                 Join Now
                 <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -126,15 +138,28 @@ const Membership = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
-                className="bg-white border border-gray-100 rounded-2xl p-6 hover:border-black transition-colors duration-300"
+                className="relative group"
               >
-                <div className="w-12 h-12 bg-black rounded-xl flex items-center justify-center mb-4">
-                  <span className="text-xl text-white">{benefit.icon}</span>
+                <div className="flex flex-row lg:flex-col items-start gap-4 md:gap-6 bg-white rounded-2xl p-4 md:p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 h-full">
+                  <div className="lg:flex lg:items-center lg:w-full lg:gap-4">
+                    <div className="bg-gray-50 p-3 md:p-4 rounded-xl flex-shrink-0">
+                      <span className="text-xl md:text-2xl text-gray-700">
+                        {benefit.icon}
+                      </span>
+                    </div>
+                    <h3 className="hidden lg:block text-lg md:text-xl font-semibold text-gray-800">
+                      {benefit.title}
+                    </h3>
+                  </div>
+                  <div className="flex-1 lg:w-full">
+                    <h3 className="text-lg md:text-xl font-semibold mb-2 text-gray-800 lg:hidden">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-sm md:text-base text-gray-600 leading-relaxed lg:mt-3">
+                      {benefit.description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-black">
-                  {benefit.title}
-                </h3>
-                <p className="text-gray-600">{benefit.description}</p>
               </motion.div>
             ))}
 
