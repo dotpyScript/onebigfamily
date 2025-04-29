@@ -1,4 +1,4 @@
-const CACHE_NAME = 'onebigfamily-v2';
+const CACHE_NAME = 'onebigfamily-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,40 +6,73 @@ const urlsToCache = [
   '/favicon.ico',
   '/android-chrome-192x192.png',
   '/android-chrome-512x512.png',
-  '/apple-touch-icon.png',
-  '/splash.png'
+  '/apple-touch-icon.png'
 ];
+
+// Log function
+const log = (message) => {
+  console.log(`[Service Worker] ${message}`);
+};
 
 // Install event - cache assets
 self.addEventListener('install', (event) => {
+  log('Installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
-        return cache.addAll(urlsToCache);
+        log('Caching app shell');
+        return Promise.all(
+          urlsToCache.map(url => {
+            return cache.add(url).catch(err => {
+              log(`Failed to cache: ${url} - ${err.message}`);
+            });
+          })
+        );
       })
-      .then(() => self.skipWaiting()) // Ensure new service worker takes over immediately
+      .then(() => {
+        log('Skip waiting on install');
+        return self.skipWaiting();
+      })
+      .catch(error => {
+        log(`Install failed: ${error.message}`);
+      })
   );
 });
 
 // Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
+  log('Activating...');
   event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            console.log('Deleting old cache:', cacheName);
-            return caches.delete(cacheName);
-          }
-        })
-      );
-    }).then(() => self.clients.claim()) // Take control of all clients immediately
+    caches.keys()
+      .then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => {
+            if (cacheName !== CACHE_NAME) {
+              log(`Deleting old cache: ${cacheName}`);
+              return caches.delete(cacheName);
+            }
+          })
+        );
+      })
+      .then(() => {
+        log('Claiming clients');
+        return self.clients.claim();
+      })
   );
 });
 
 // Fetch event - network first, falling back to cache
 self.addEventListener('fetch', (event) => {
+  // Skip cross-origin requests
+  if (!event.request.url.startsWith(self.location.origin)) {
+    return;
+  }
+
+  // Handle only GET requests
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then(response => {
@@ -48,19 +81,23 @@ self.addEventListener('fetch', (event) => {
           return response;
         }
 
-        // Clone the response as it can only be consumed once
+        // Clone the response
         const responseToCache = response.clone();
 
         // Add to cache
         caches.open(CACHE_NAME)
           .then(cache => {
             cache.put(event.request, responseToCache);
+            log(`Cached resource: ${event.request.url}`);
+          })
+          .catch(error => {
+            log(`Failed to cache: ${event.request.url} - ${error.message}`);
           });
 
         return response;
       })
       .catch(() => {
-        // If network request fails, try to get it from cache
+        log(`Serving from cache: ${event.request.url}`);
         return caches.match(event.request);
       })
   );
