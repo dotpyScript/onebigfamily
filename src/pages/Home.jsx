@@ -5,7 +5,10 @@ import About from '../components/About';
 import Impact from '../components/Impact';
 import Membership from '../components/Membership';
 import Events from '../components/Events';
+import News from '../components/News';
 import Contact from '../components/Contact';
+import CallToAction from '../components/CallToAction';
+import SEO from '../components/SEO';
 
 const Home = () => {
   const location = useLocation();
@@ -36,14 +39,24 @@ const Home = () => {
   }, [location]);
 
   return (
-    <main className="w-full">
-      <Hero id="home" />
-      <About id="about" />
-      <Impact id="impact" />
-      <Membership id="membership" />
-      <Events id="events" />
-      <Contact id="contact" />
-    </main>
+    <>
+      <SEO
+        title="Home"
+        description="One Big Family is dedicated to supporting military families through community initiatives, education programs, and charitable activities. Join us in making a difference."
+        keywords="One Big Family, military families, community support, charity, education, Nigeria, family support, community development, home"
+        url="/"
+      />
+      <main className="w-full">
+        <Hero id="home" />
+        <About id="about" />
+        <Impact id="impact" />
+        <Membership id="membership" />
+        <Events id="events" />
+        <News id="news" />
+        <CallToAction />
+        <Contact id="contact" />
+      </main>
+    </>
   );
 };
 

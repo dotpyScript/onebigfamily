@@ -1,6 +1,7 @@
 {
-  "short_name": "OneBigFamily",
-  "name": "OneBigFamily - Community Platform",
+  "short_name": "One Big Family",
+  "name": "One Big Family - Community Platform",
+  "description": "A platform supporting military families through community initiatives and charitable activities",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,18 +21,40 @@
       "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "orientation": "portrait",
-  "description": "A community platform for OneBigFamily",
-  "categories": ["social", "community"],
+  "categories": ["social", "community", "charity"],
   "screenshots": [
     {
-      "src": "screenshot1.png",
+      "src": "/images/hero5.jpg",
       "sizes": "1280x720",
-      "type": "image/png"
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "One Big Family Homepage"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Donate",
+      "short_name": "Donate",
+      "description": "Support our community",
+      "url": "/donate",
+      "icons": [{ "src": "android-chrome-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Events",
+      "short_name": "Events",
+      "description": "View upcoming events",
+      "url": "/events",
+      "icons": [{ "src": "android-chrome-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false
 }

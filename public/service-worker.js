@@ -1,12 +1,32 @@
-const CACHE_NAME = 'onebigfamily-v3';
-const urlsToCache = [
+const CACHE_NAME = 'onebigfamily-v7';
+
+// Core app shell files needed for basic functionality
+const APP_SHELL = [
   '/',
   '/index.html',
-  '/manifest.json',
+  '/manifest.json'
+];
+
+// Critical static assets that should be explicitly cached
+const CRITICAL_ASSETS = [
   '/favicon.ico',
   '/android-chrome-192x192.png',
   '/android-chrome-512x512.png',
-  '/apple-touch-icon.png'
+  '/apple-touch-icon.png',
+  '/favicon-16x16.png',
+  '/favicon-32x32.png',
+  '/logo.png',
+  '/mstile-150x150.png'
+];
+
+// Images to precache (adding hero images)
+const PRECACHE_IMAGES = [
+  '/images/hero1.jpg',
+  '/images/hero2.jpg',
+  '/images/hero3.jpg',
+  '/images/hero4.jpg',
+  '/images/hero5.jpg',
+  '/images/help-illustration.svg'
 ];
 
 // Log function
@@ -14,91 +34,331 @@ const log = (message) => {
   console.log(`[Service Worker] ${message}`);
 };
 
-// Install event - cache assets
-self.addEventListener('install', (event) => {
-  log('Installing...');
+// Helper function to cache a single resource with error handling
+function cacheResource(cache, url) {
+  return fetch(url)
+    .then(response => {
+      if (!response || response.status !== 200) {
+        log(`Failed to cache: ${url}, status: ${response ? response.status : 'no response'}`);
+        return false;
+      }
+      return cache.put(url, response)
+        .then(() => {
+          log(`Successfully cached: ${url}`);
+          return true;
+        });
+    })
+    .catch(error => {
+      log(`Error caching ${url}: ${error.message}`);
+      return false;
+    });
+}
+
+// Handle critical assets with special care
+function handleCriticalAsset(event, assetPath) {
+  return caches.match(event.request)
+    .then(cachedResponse => {
+      if (cachedResponse) {
+        // We have it cached! Refresh cache in background
+        fetch(event.request)
+          .then(response => {
+            if (response && response.status === 200) {
+              caches.open(CACHE_NAME)
+                .then(cache => cache.put(event.request, response))
+                .catch(err => log(`Critical asset cache refresh failed: ${err.message}`));
+            }
+          })
+          .catch(err => log(`Background fetch for critical asset failed: ${err.message}`));
+        return cachedResponse;
+      }
+
+      // If not cached, try network, then provide fallback
+      return fetch(event.request)
+        .then(response => {
+          if (!response || response.status !== 200) {
+            log(`Network failed for critical asset: ${assetPath}`);
+            if (assetPath.includes('favicon.ico')) {
+              return createImageFallbackResponse();
+            }
+            throw new Error('Critical asset not available');
+          }
+
+          // Cache the successful response for future use
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(event.request, responseToCache))
+            .catch(err => log(`Critical asset caching failed: ${err.message}`));
+
+          return response;
+        })
+        .catch(error => {
+          log(`Fetch failed for critical asset: ${assetPath}, ${error.message}`);
+
+          // For favicon.ico, return a transparent image
+          if (assetPath.includes('favicon.ico')) {
+            return createImageFallbackResponse();
+          }
+
+          // For other critical assets, fail more gracefully
+          throw error;
+        });
+    });
+}
+
+// Install event handler
+self.addEventListener('install', event => {
+  log('Service Worker installing');
+
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        log('Caching app shell');
-        return Promise.all(
-          urlsToCache.map(url => {
-            return cache.add(url).catch(err => {
-              log(`Failed to cache: ${url} - ${err.message}`);
-            });
-          })
-        );
+        log('Cache opened, caching core assets');
+        return Promise.all([
+          // Cache core static assets
+          cache.addAll([
+            '/',
+            '/index.html',
+            '/static/js/main.chunk.js',
+            '/static/js/bundle.js',
+            '/manifest.json',
+            '/static/media/logo.png',
+            '/static/css/main.chunk.css'
+          ]),
+          // Cache critical assets separately for better error handling
+          ...CRITICAL_ASSETS.map(asset => cacheResource(cache, asset))
+        ]);
       })
       .then(() => {
-        log('Skip waiting on install');
+        log('Installation complete');
         return self.skipWaiting();
       })
       .catch(error => {
-        log(`Install failed: ${error.message}`);
+        log(`Installation failed: ${error.message}`);
       })
   );
 });
 
-// Activate event - clean up old caches
-self.addEventListener('activate', (event) => {
-  log('Activating...');
+// Activate event handler
+self.addEventListener('activate', event => {
+  log('Service Worker activating');
+
+  // Clean up old caches
   event.waitUntil(
     caches.keys()
       .then(cacheNames => {
         return Promise.all(
-          cacheNames.map(cacheName => {
-            if (cacheName !== CACHE_NAME) {
-              log(`Deleting old cache: ${cacheName}`);
-              return caches.delete(cacheName);
+          cacheNames.map(name => {
+            if (name !== CACHE_NAME) {
+              log(`Deleting old cache: ${name}`);
+              return caches.delete(name);
             }
           })
         );
       })
       .then(() => {
-        log('Claiming clients');
+        log('Activation complete, claiming clients');
         return self.clients.claim();
+      })
+      .catch(error => {
+        log(`Activation error: ${error.message}`);
       })
   );
 });
 
-// Fetch event - network first, falling back to cache
-self.addEventListener('fetch', (event) => {
+// Helper function to create transparent image fallback
+function createImageFallbackResponse() {
+  // 1x1 transparent PNG
+  const TRANSPARENT_PNG = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=';
+  const byteCharacters = atob(TRANSPARENT_PNG);
+  const byteArrays = [];
+
+  for (let offset = 0; offset < byteCharacters.length; offset += 512) {
+    const slice = byteCharacters.slice(offset, offset + 512);
+
+    const byteNumbers = new Array(slice.length);
+    for (let i = 0; i < slice.length; i++) {
+      byteNumbers[i] = slice.charCodeAt(i);
+    }
+
+    const byteArray = new Uint8Array(byteNumbers);
+    byteArrays.push(byteArray);
+  }
+
+  const blob = new Blob(byteArrays, { type: 'image/png' });
+  return new Response(blob, {
+    status: 200,
+    statusText: 'OK',
+    headers: new Headers({ 'Content-Type': 'image/png' })
+  });
+}
+
+// Fetch event handler
+self.addEventListener('fetch', event => {
+  const url = new URL(event.request.url);
+
   // Skip cross-origin requests
-  if (!event.request.url.startsWith(self.location.origin)) {
+  if (url.origin !== self.location.origin) {
     return;
   }
 
-  // Handle only GET requests
-  if (event.request.method !== 'GET') {
+  // Check if request is for a critical asset
+  const criticalAssetPath = CRITICAL_ASSETS.find(asset => url.pathname.endsWith(asset));
+  if (criticalAssetPath) {
+    event.respondWith(handleCriticalAsset(event, criticalAssetPath));
     return;
   }
 
-  event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        // Check if we received a valid response
-        if (!response || response.status !== 200 || response.type !== 'basic') {
+  // Check if request is for an image
+  const isImage = event.request.destination === 'image' ||
+    /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(url.pathname);
+
+  if (isImage) {
+    event.respondWith(
+      caches.match(event.request)
+        .then(cachedResponse => {
+          if (cachedResponse) {
+            // If we have it in cache, return immediately
+            // Also update cache in the background
+            fetch(event.request)
+              .then(response => {
+                if (response && response.status === 200) {
+                  caches.open(CACHE_NAME)
+                    .then(cache => cache.put(event.request, response))
+                    .catch(err => log(`Image cache update failed: ${err.message}`));
+                }
+              })
+              .catch(err => log(`Background fetch for image failed: ${err.message}`));
+
+            return cachedResponse;
+          }
+
+          // If not in cache, try to fetch from network
+          return fetch(event.request)
+            .then(response => {
+              if (!response || response.status !== 200) {
+                throw new Error('Image not available');
+              }
+
+              // Cache the response for future
+              const responseToCache = response.clone();
+              caches.open(CACHE_NAME)
+                .then(cache => cache.put(event.request, responseToCache))
+                .catch(err => log(`Image caching failed: ${err.message}`));
+
+              return response;
+            })
+            .catch(error => {
+              log(`Image fetch failed: ${url.pathname}, ${error.message}`);
+              return createImageFallbackResponse();
+            });
+        })
+    );
+    return;
+  }
+
+  // For HTML navigations, use network-first strategy with fallback to cached home page
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then(response => {
+          if (!response || response.status !== 200) {
+            throw new Error('Navigation response not valid');
+          }
+
+          // Cache the navigation result
+          const responseToCache = response.clone();
+          caches.open(CACHE_NAME)
+            .then(cache => cache.put(event.request, responseToCache))
+            .catch(err => log(`Navigation caching failed: ${err.message}`));
+
           return response;
-        }
+        })
+        .catch(error => {
+          log(`Navigation fetch failed, serving from cache: ${error.message}`);
 
-        // Clone the response
-        const responseToCache = response.clone();
+          return caches.match(event.request)
+            .then(cachedResponse => {
+              // If we have a match in cache, return it
+              if (cachedResponse) {
+                return cachedResponse;
+              }
 
-        // Add to cache
-        caches.open(CACHE_NAME)
-          .then(cache => {
-            cache.put(event.request, responseToCache);
-            log(`Cached resource: ${event.request.url}`);
+              // If no match, fallback to cached home page
+              return caches.match('/index.html');
+            });
+        })
+    );
+    return;
+  }
+
+  // For all other requests, use stale-while-revalidate strategy
+  event.respondWith(
+    caches.match(event.request)
+      .then(cachedResponse => {
+        // Clone the request to use it in fetch later
+        const fetchPromise = fetch(event.request.clone())
+          .then(response => {
+            // Don't cache non-valid responses
+            if (!response || response.status !== 200) {
+              return response;
+            }
+
+            // Cache the new response
+            const responseToCache = response.clone();
+            caches.open(CACHE_NAME)
+              .then(cache => cache.put(event.request, responseToCache))
+              .catch(err => log(`Cache update failed: ${err.message}`));
+
+            return response;
           })
           .catch(error => {
-            log(`Failed to cache: ${event.request.url} - ${error.message}`);
+            log(`Fetch failed: ${url.pathname}, ${error.message}`);
+            // Return undefined to fall back to cached version if it exists
+            return undefined;
           });
 
-        return response;
+        // Return the cache response immediately, update cache in background
+        return cachedResponse || fetchPromise;
       })
-      .catch(() => {
-        log(`Serving from cache: ${event.request.url}`);
-        return caches.match(event.request);
+  );
+});
+
+// Handle push notifications
+self.addEventListener('push', (event) => {
+  log('Push notification received');
+
+  const title = 'One Big Family';
+  const options = {
+    body: event.data ? event.data.text() : 'New update available',
+    icon: '/android-chrome-192x192.png',
+    badge: '/favicon-32x32.png'
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(title, options)
+      .catch(err => log(`Notification error: ${err.message}`))
+  );
+});
+
+// Handle notification clicks
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close();
+
+  event.waitUntil(
+    clients.matchAll({ type: 'window' })
+      .then(clientList => {
+        // Check if there's already a window/tab open with the target URL
+        for (const client of clientList) {
+          if (client.url === '/' && 'focus' in client) {
+            return client.focus();
+          }
+        }
+        // If no window/tab is already open, open a new one
+        if (clients.openWindow) {
+          return clients.openWindow('/');
+        }
+        return Promise.resolve();
       })
+      .catch(err => log(`Notification click error: ${err.message}`))
   );
 }); 

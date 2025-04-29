@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { FaHome, FaChevronRight } from 'react-icons/fa';
 import Contact from '../components/Contact';
+import SEO from '../components/SEO';
 
 const ContactPage = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -13,8 +14,38 @@ const ContactPage = () => {
     img.onload = () => setImageLoaded(true);
   }, []);
 
+  const contactStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact One Big Family',
+    description:
+      'Get in touch with One Big Family. We are here to answer your questions and help you get involved in our community initiatives.',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'One Big Family',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        email: 'contact@onebigfamily.org',
+        availableLanguage: ['English'],
+      },
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'NG',
+        addressLocality: 'Nigeria',
+      },
+    },
+  };
+
   return (
     <>
+      <SEO
+        title="Contact Us"
+        description="Get in touch with One Big Family. We're here to answer your questions about our community initiatives, events, and how you can get involved in supporting military families."
+        keywords="contact One Big Family, get in touch, contact form, support, questions, inquiries, military family support contact"
+        url="/contact"
+        structuredData={contactStructuredData}
+      />
       {/* Hero Section with Image Background */}
       <section className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         <motion.div

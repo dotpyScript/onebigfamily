@@ -2,10 +2,39 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FaHome, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 
 const AboutPage = () => {
+  const aboutStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    mainEntity: {
+      '@type': 'Organization',
+      name: 'One Big Family',
+      description:
+        'A community-driven organization dedicated to supporting military families through various initiatives and programs.',
+      foundingDate: '2023',
+      foundingLocation: {
+        '@type': 'Place',
+        name: 'Nigeria',
+      },
+      areaServed: 'Nigeria',
+      member: {
+        '@type': 'OrganizationRole',
+        roleName: 'Military Families',
+      },
+    },
+  };
+
   return (
     <>
+      <SEO
+        title="About Us"
+        description="Learn about One Big Family's mission to support military families through community initiatives, education programs, and charitable activities. Discover our story, values, and impact."
+        keywords="about One Big Family, military family support, community initiatives, charity mission, NGO history, military community, family support programs"
+        url="/about"
+        structuredData={aboutStructuredData}
+      />
       {/* Hero Section with Image Background */}
       <section className="relative h-[50vh] overflow-hidden">
         <div

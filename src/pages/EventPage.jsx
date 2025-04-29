@@ -9,6 +9,7 @@ import {
   FaClock,
 } from 'react-icons/fa';
 import OptimizedImage from '../components/OptimizedImage';
+import SEO from '../components/SEO';
 
 const EventPage = () => {
   const upcomingEvents = [
@@ -170,8 +171,35 @@ const EventPage = () => {
     </motion.div>
   );
 
+  const eventsStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'One Big Family Events',
+    description:
+      'Discover upcoming community events, workshops, and gatherings organized by One Big Family. Join us in building stronger communities.',
+    mainEntity: {
+      '@type': 'Event',
+      organizer: {
+        '@type': 'Organization',
+        name: 'One Big Family',
+        url: 'https://onebigfamily.org',
+      },
+      location: {
+        '@type': 'Place',
+        name: 'Various Locations in Nigeria',
+      },
+    },
+  };
+
   return (
     <>
+      <SEO
+        title="Events"
+        description="Join One Big Family's community events, workshops, and gatherings. Discover upcoming activities that bring our military families together and strengthen our community bonds."
+        keywords="community events, military family events, workshops, gatherings, family activities, community building, One Big Family events"
+        url="/events"
+        structuredData={eventsStructuredData}
+      />
       {/* Hero Section */}
       <section className="relative h-[50vh] overflow-hidden">
         <div className="absolute inset-0">

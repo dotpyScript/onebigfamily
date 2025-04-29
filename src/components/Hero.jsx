@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaChevronRight,
@@ -13,6 +13,9 @@ const Hero = () => {
   const [currentAdjectiveIndex, setCurrentAdjectiveIndex] = useState(0);
   const [displayText, setDisplayText] = useState('');
   const [isTyping, setIsTyping] = useState(true);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [fallbackActive, setFallbackActive] = useState(false);
+  const imagesRef = useRef([]);
   const targetCount = 523; // Number of people helped
   const incrementSpeed = 35; // Lower is faster
   const communityAdjectives = [
@@ -30,6 +33,39 @@ const Hero = () => {
     '/images/hero2.jpg',
     '/images/hero4.jpg',
   ];
+
+  // Fallback image in case all others fail
+  const fallbackImage = '/images/hero5.jpg';
+
+  // Preload images
+  useEffect(() => {
+    const preloadImages = () => {
+      imagesRef.current = backgroundImages.map((src) => {
+        const img = new Image();
+        img.src = src;
+        img.onload = () => {
+          // Set the first image as loaded when it completes
+          if (src === backgroundImages[0] && !imageLoaded) {
+            setImageLoaded(true);
+          }
+        };
+        img.onerror = () => {
+          console.error(`Failed to load image: ${src}`);
+          // If all images fail, use fallback
+          if (backgroundImages.every((_, i) => imagesRef.current[i].failed)) {
+            setFallbackActive(true);
+          }
+        };
+        return img;
+      });
+
+      // Also preload the fallback image
+      const fallbackImg = new Image();
+      fallbackImg.src = fallbackImage;
+    };
+
+    preloadImages();
+  }, []);
 
   const typeText = async (text) => {
     setIsTyping(true);
@@ -79,16 +115,28 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, [backgroundImages.length]);
 
+  // Determine background image to use
+  const currentBackgroundImage = fallbackActive
+    ? fallbackImage
+    : backgroundImages[currentImageIndex];
+
   return (
     <section
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center transition-all duration-[3000ms]"
       id="home"
       style={{
-        backgroundImage: `url(${backgroundImages[currentImageIndex]})`,
+        backgroundImage: `url(${currentBackgroundImage})`,
         fontFamily: "'Poppins', sans-serif",
         transition: 'background-image 3s ease-in-out',
       }}
     >
+      {/* Loading overlay - shown only during initial load */}
+      {!imageLoaded && (
+        <div className="absolute inset-0 z-20 bg-black flex items-center justify-center">
+          <div className="text-white text-xl">Loading...</div>
+        </div>
+      )}
+
       {/* Dark overlay with gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/70 to-black/80"></div>
 

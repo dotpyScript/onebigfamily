@@ -4,11 +4,12 @@ import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import DonationPage from './pages/DonationPage';
-import ContactPage from './pages/ContactPage';
-import EventPage from './pages/EventPage';
 import AboutPage from './pages/AboutPage';
-import ScrollToTop from './components/ScrollToTop';
+import EventPage from './pages/EventPage';
+import News from './pages/News';
+import ContactPage from './pages/ContactPage';
+import DonationPage from './pages/DonationPage';
+import ScrollToTop from './utils/ScrollToTop';
 
 const App = () => {
   return (
@@ -20,10 +21,12 @@ const App = () => {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/donate" element={<DonationPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/events" element={<EventPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/events" element={<EventPage />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/news/:articleId" element={<News />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/donate" element={<DonationPage />} />
           </Routes>
         </main>
         <Footer />

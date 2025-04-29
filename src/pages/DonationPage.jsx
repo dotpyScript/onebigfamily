@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FaCopy, FaCheckCircle, FaHome, FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import SEO from '../components/SEO';
 
 const DonationPage = () => {
   const [copiedAccount, setCopiedAccount] = useState(null);
@@ -28,8 +29,33 @@ const DonationPage = () => {
     setTimeout(() => setCopiedAccount(null), 2000);
   };
 
+  const donationStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'DonateAction',
+    name: 'Donate to One Big Family',
+    description:
+      'Support our mission to strengthen military families through your generous donations.',
+    agent: {
+      '@type': 'Organization',
+      name: 'One Big Family',
+      url: 'https://onebigfamily.org',
+    },
+    recipient: {
+      '@type': 'Organization',
+      name: 'One Big Family',
+      description: 'Supporting military families through community initiatives',
+    },
+  };
+
   return (
     <>
+      <SEO
+        title="Donate"
+        description="Make a difference by supporting One Big Family's mission. Your donations help us provide essential support to military families through education, community programs, and charitable activities."
+        keywords="donate, support military families, charitable giving, community support, make a difference, One Big Family donation"
+        url="/donate"
+        structuredData={donationStructuredData}
+      />
       {/* Hero Section with Image Background */}
       <section className="relative h-[50vh] overflow-hidden">
         <div
