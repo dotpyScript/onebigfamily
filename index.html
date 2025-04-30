@@ -79,7 +79,10 @@
         margin: 0;
         padding: 0;
         height: 100%;
-        overflow: hidden;
+      }
+
+      body {
+        overflow: hidden; /* Only hidden initially, will be enabled after loading */
       }
 
       #app-loader {
@@ -190,7 +193,11 @@
         }
       }
 
-      /* Loaded state - hide the loader */
+      /* Loaded state - hide the loader and enable scrolling */
+      .app-loaded {
+        overflow: auto !important; /* Enable scrolling when loaded */
+      }
+
       .app-loaded #app-loader {
         opacity: 0;
         pointer-events: none;
@@ -235,7 +242,8 @@
               setTimeout(function () {
                 if (loader && loader.parentNode) {
                   loader.parentNode.removeChild(loader);
-                  // Re-enable scrolling
+                  // Ensure scrolling is enabled
+                  document.documentElement.style.overflow = '';
                   document.body.style.overflow = '';
                 }
               }, 500);
@@ -260,6 +268,8 @@
             setTimeout(function () {
               if (loader && loader.parentNode) {
                 loader.parentNode.removeChild(loader);
+                // Ensure scrolling is enabled
+                document.documentElement.style.overflow = '';
                 document.body.style.overflow = '';
               }
             }, 500);
