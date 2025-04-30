@@ -214,22 +214,59 @@
     <div id="root"></div>
 
     <script>
-      // Hide loader when app is ready
-      window.addEventListener('load', function () {
-        // Wait for app to be fully rendered
-        setTimeout(function () {
-          // Add a class to hide the loader with transition
-          document.body.classList.add('app-loaded');
+      // Improved loader handling
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get the loader element
+        const loader = document.getElementById('app-loader');
 
-          // Remove the loader completely after transition
-          setTimeout(function () {
-            const loader = document.getElementById('app-loader');
-            if (loader && loader.parentNode) {
-              loader.parentNode.removeChild(loader);
+        // Wait for both DOM content and all resources to load
+        window.addEventListener('load', function () {
+          // Additional wait to ensure React has rendered the content
+          // and to prevent flickering if content loads very quickly
+          const checkContentReady = function () {
+            const rootContent =
+              document.getElementById('root').children.length > 0;
+
+            if (rootContent) {
+              // Content is ready, fade out the loader
+              document.body.classList.add('app-loaded');
+
+              // Remove the loader from DOM after transition completes
+              setTimeout(function () {
+                if (loader && loader.parentNode) {
+                  loader.parentNode.removeChild(loader);
+                  // Re-enable scrolling
+                  document.body.style.overflow = '';
+                }
+              }, 500);
+            } else {
+              // Content not ready yet, check again in 100ms
+              setTimeout(checkContentReady, 100);
             }
-          }, 500);
-        }, 800); // Adjust timing as needed for your app's loading speed
+          };
+
+          // Start checking if content is ready
+          // Wait a minimum time to prevent flash
+          setTimeout(checkContentReady, 1000);
+        });
+
+        // Safety timeout - hide loader after maximum wait time (10 seconds)
+        // This prevents the loader from being stuck if something goes wrong
+        setTimeout(function () {
+          if (!document.body.classList.contains('app-loaded')) {
+            console.log('Loader safety timeout reached');
+            document.body.classList.add('app-loaded');
+
+            setTimeout(function () {
+              if (loader && loader.parentNode) {
+                loader.parentNode.removeChild(loader);
+                document.body.style.overflow = '';
+              }
+            }, 500);
+          }
+        }, 10000);
       });
     </script>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
