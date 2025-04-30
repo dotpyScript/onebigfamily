@@ -327,12 +327,36 @@ self.addEventListener('fetch', event => {
 self.addEventListener('push', (event) => {
   log('Push notification received');
 
-  const title = 'One Big Family';
+  let payload = {};
+  try {
+    payload = event.data ? event.data.json() : {};
+  } catch (e) {
+    payload = {
+      title: 'One Big Family',
+      body: event.data ? event.data.text() : 'New update available'
+    };
+  }
+
+  const title = payload.title || 'One Big Family';
   const options = {
-    body: event.data ? event.data.text() : 'New update available',
+    body: payload.body || 'New update available',
     icon: '/android-chrome-192x192.png',
-    badge: '/favicon-32x32.png'
+    badge: '/favicon-32x32.png',
+    tag: 'onebigfamily-notification',
+    vibrate: [100, 50, 100], // Vibration pattern for mobile devices
+    data: {
+      url: payload.url || '/'
+    },
+    actions: [
+      {
+        action: 'open',
+        title: 'Open App'
+      }
+    ],
+    requireInteraction: true // Keep notification visible until user interacts with it
   };
+
+  log(`Showing notification: ${title}`);
 
   event.waitUntil(
     self.registration.showNotification(title, options)
@@ -342,23 +366,33 @@ self.addEventListener('push', (event) => {
 
 // Handle notification clicks
 self.addEventListener('notificationclick', (event) => {
+  log(`Notification clicked: ${event.notification.tag}, action: ${event.action}`);
   event.notification.close();
 
+  // Extract the URL from the notification data
+  const urlToOpen = event.notification.data && event.notification.data.url ?
+    event.notification.data.url : '/';
+
   event.waitUntil(
-    clients.matchAll({ type: 'window' })
+    clients.matchAll({ type: 'window', includeUncontrolled: true })
       .then(clientList => {
-        // Check if there's already a window/tab open with the target URL
+        // Try to focus an existing window
         for (const client of clientList) {
-          if (client.url === '/' && 'focus' in client) {
+          if ((client.url === urlToOpen || client.url.endsWith('/')) && 'focus' in client) {
+            log('Focusing existing client window');
             return client.focus();
           }
         }
-        // If no window/tab is already open, open a new one
-        if (clients.openWindow) {
-          return clients.openWindow('/');
-        }
-        return Promise.resolve();
+
+        // If no window found, open a new one
+        log('Opening new client window');
+        return clients.openWindow(urlToOpen);
       })
-      .catch(err => log(`Notification click error: ${err.message}`))
+      .catch(err => log(`Notification click handling error: ${err.message}`))
   );
+});
+
+// Handle notification close
+self.addEventListener('notificationclose', (event) => {
+  log('Notification closed without clicking');
 }); 
