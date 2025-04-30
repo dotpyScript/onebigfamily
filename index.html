@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
 
     <!-- PWA Support -->
     <meta name="theme-color" content="#000000" />
@@ -16,14 +19,14 @@
     <meta name="application-name" content="One Big Family" />
 
     <!-- Primary Meta Tags -->
-    <title>One Big Family - Building Stronger Communities Together</title>
+    <title>One Big Family</title>
     <meta
       name="title"
       content="One Big Family - Building Stronger Communities Together"
     />
     <meta
       name="description"
-      content="Join One Big Family in our mission to support and strengthen military families through community initiatives, education programs, and charitable activities."
+      content="One Big Family - A community platform for connecting and supporting military families"
     />
     <meta
       name="keywords"
@@ -68,11 +71,165 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
+
+    <style>
+      /* Modern Loading Screen Styles */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #app-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out;
+      }
+
+      .logo-container {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .logo {
+        width: 100%;
+        height: auto;
+        opacity: 0;
+        transform: scale(0.8);
+        animation: fadeInLogo 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      }
+
+      .logo-ring {
+        position: absolute;
+        top: -15px;
+        left: -15px;
+        width: calc(100% + 30px);
+        height: calc(100% + 30px);
+        border: 3px solid transparent;
+        border-radius: 50%;
+        border-top-color: #3b82f6;
+        border-right-color: #3b82f6;
+        animation: spin 1.5s linear infinite;
+      }
+
+      .app-title {
+        margin-top: 20px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-weight: 600;
+        font-size: 24px;
+        color: #333;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 0.5s forwards;
+      }
+
+      .loading-text {
+        margin-top: 10px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        color: #666;
+        opacity: 0;
+        animation: fadeIn 1s ease-out 0.8s forwards;
+      }
+
+      /* Animations */
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes fadeInLogo {
+        0% {
+          opacity: 0;
+          transform: scale(0.8);
+        }
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes pulseLight {
+        0% {
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5);
+        }
+        70% {
+          box-shadow: 0 0 0 20px rgba(59, 130, 246, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+        }
+      }
+
+      /* Loaded state - hide the loader */
+      .app-loaded #app-loader {
+        opacity: 0;
+        pointer-events: none;
+      }
+    </style>
   </head>
 
   <body class="font-sans">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+    <!-- Modern Loading Screen -->
+    <div id="app-loader">
+      <div class="logo-container">
+        <div class="logo-ring"></div>
+        <img src="/logo.png" alt="One Big Family Logo" class="logo" />
+      </div>
+      <div class="app-title">One Big Family</div>
+      <div class="loading-text">Loading your experience...</div>
+    </div>
+
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // Hide loader when app is ready
+      window.addEventListener('load', function () {
+        // Wait for app to be fully rendered
+        setTimeout(function () {
+          // Add a class to hide the loader with transition
+          document.body.classList.add('app-loaded');
+
+          // Remove the loader completely after transition
+          setTimeout(function () {
+            const loader = document.getElementById('app-loader');
+            if (loader && loader.parentNode) {
+              loader.parentNode.removeChild(loader);
+            }
+          }, 500);
+        }, 800); // Adjust timing as needed for your app's loading speed
+      });
+    </script>
   </body>
 </html>
